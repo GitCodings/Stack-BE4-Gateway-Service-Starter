@@ -1,8 +1,11 @@
 # CS122B Backend 4 - The Gateway Service
 
-#### [Config](#config)
+#### [Application Settings](#application-settings)
 
-## Config
+## Application Settings
+
+This file is already provided for you and configure Spring Boot's settings
+
 ##### `application.yml`
 
 ```yml
