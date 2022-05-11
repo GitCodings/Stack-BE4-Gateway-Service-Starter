@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @Sql("/empty-gateway-test-data.sql")
-@AutoConfigureWebTestClient
+@AutoConfigureWebTestClient(timeout = "64000")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GatewayServiceTest
 {
