@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StackRouteLocator
+public class GatewayRouteLocator
 {
     private final GatewayServiceConfig config;
     private final AuthFilter           authFilter;
 
     @Autowired
-    public StackRouteLocator(GatewayServiceConfig config,
-                             AuthFilter authFilter)
+    public GatewayRouteLocator(GatewayServiceConfig config,
+                               AuthFilter authFilter)
     {
         this.config = config;
         this.authFilter = authFilter;
@@ -26,6 +26,12 @@ public class StackRouteLocator
     public RouteLocator routeLocator(RouteLocatorBuilder builder)
     {
         return builder.routes()
+                      .route("idm",
+                             r -> r.uri(config.getIdm()))
+                      .route("movies",
+                             r -> r.uri(config.getMovies()))
+                      .route("billing",
+                             r -> r.uri(config.getBilling()))
                       .build();
     }
 }
