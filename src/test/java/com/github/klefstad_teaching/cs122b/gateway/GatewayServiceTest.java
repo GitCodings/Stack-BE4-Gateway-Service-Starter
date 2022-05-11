@@ -139,7 +139,7 @@ public class GatewayServiceTest
     }
 
     @Test
-    @Timeout(value = 30)
+    @Timeout(value = 60)
     @Order(3)
     public void speedTest()
         throws Exception
