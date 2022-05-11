@@ -1,6 +1,7 @@
 package com.github.klefstad_teaching.cs122b.gateway.routes;
 
 import com.github.klefstad_teaching.cs122b.gateway.config.GatewayServiceConfig;
+import com.github.klefstad_teaching.cs122b.gateway.filter.AuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -14,7 +15,8 @@ public class StackRouteLocator
     private final AuthFilter           authFilter;
 
     @Autowired
-    public StackRouteLocator(GatewayServiceConfig config, AuthFilter authFilter)
+    public StackRouteLocator(GatewayServiceConfig config,
+                             AuthFilter authFilter)
     {
         this.config = config;
         this.authFilter = authFilter;

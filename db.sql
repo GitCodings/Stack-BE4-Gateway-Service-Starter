@@ -1,2 +1,1 @@
-CREATE SCHEMA idm;
 CREATE SCHEMA gateway;

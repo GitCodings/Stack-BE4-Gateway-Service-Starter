@@ -1,16 +1,11 @@
 package com.github.klefstad_teaching.cs122b.gateway;
 
-import com.github.klefstad_teaching.cs122b.core.spring.StackService;
 import com.github.klefstad_teaching.cs122b.gateway.config.GatewayServiceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@SpringBootApplication(exclude = {
-    SecurityAutoConfiguration.class
-})
-@StackService
+@SpringBootApplication
 @EnableConfigurationProperties({
     GatewayServiceConfig.class
 })

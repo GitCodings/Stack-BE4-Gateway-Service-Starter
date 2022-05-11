@@ -1,4 +1,4 @@
-package com.github.klefstad_teaching.cs122b.gateway.routes;
+package com.github.klefstad_teaching.cs122b.gateway.filter;
 
 import com.github.klefstad_teaching.cs122b.core.result.Result;
 import com.github.klefstad_teaching.cs122b.gateway.config.GatewayServiceConfig;
@@ -35,12 +35,24 @@ public class AuthFilter implements GatewayFilter
         return chain.filter(exchange);
     }
 
-    private Result authenticate(String encodedJWT)
+    private Mono<Void> setToFail(ServerWebExchange exchange)
     {
-        return Result.NO_RESULT;
+        return Mono.empty();
     }
 
-    private Optional<String> encodedJWT(ServerWebExchange exchange)
+    /**
+     * Takes in a accessToken token and creates Mono chain that calls the idm and maps the value to
+     * a Result
+     *
+     * @param accessToken a encodedJWT
+     * @return a Mono that returns a Result
+     */
+    private Mono<Result> authenticate(String accessToken)
+    {
+        return Mono.empty();
+    }
+
+    private Optional<String> getAccessTokenFromHeader(ServerWebExchange exchange)
     {
         return Optional.empty();
     }

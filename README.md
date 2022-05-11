@@ -1,44 +1,63 @@
 # CS122B Backend 4 - The Gateway Service
 
 #### [Application](#application)
- - [pom.xml](#pomxml)
- - [application.yml](#applicationyml)
- - [Resources](#resources)
- - [Tests](#tests)
+
+- [pom.xml](#pomxml)
+- [application.yml](#applicationyml)
+- [Resources](#resources)
+- [Tests](#tests)
 
 #### [Database](#database)
- - [Schemas](#schemas)
- - [Tables](#tables)
+
+- [Schemas](#schemas)
+- [Tables](#tables)
+
+#### [Routes](#routes)
+
+- [IDM](#idm)
+- [Movies](#movies)
+- [Billing](#billing)
+
+#### [Filters](#filters)
+
+- [GlobalLoggingFilter](#globalloggingfilter)
+- [AuthFilter](#authfilter)
 
 ## Application
 
-Our application depends on a lot of files and resources to be able to run correctly. These files have been provided for you and are listed here for your reference. These files should **NEVER** be modified and must be left **AS IS**.
+Our application depends on a lot of files and resources to be able to run correctly. These files
+have been provided for you and are listed here for your reference. These files should **NEVER** be
+modified and must be left **AS IS**.
 
 ### pom.xml
 
-Maven gets all its settings from a file called `pom.xml`. This file determines the dependencies we will use in our project as well as the plugins we use for compiling, testing, building, ect..
+Maven gets all its settings from a file called `pom.xml`. This file determines the dependencies we
+will use in our project as well as the plugins we use for compiling, testing, building, ect..
 
- - [pom.xml](pom.xml)
+- [pom.xml](pom.xml)
 
 ### application.yml
 
-Spring Boot has a large number of settings that can be set with a file called `application.yml`. We have already created this file for you and have filled it with some settings. There is a file for the main application as well as one for the tests. 
+Spring Boot has a large number of settings that can be set with a file called `application.yml`. We
+have already created this file for you and have filled it with some settings. There is a file for
+the main application as well as one for the tests.
 
- - [Main application.yml](/src/main/resources/application.yml)
- - [Test application.yml](/src/test/resources/application.yml)
+- [Main application.yml](/src/main/resources/application.yml)
+- [Test application.yml](/src/test/resources/application.yml)
 
 ### Resources
 
-There are two folders in this project that contain resources, and application settings, as well as files required for the tests.
+There are two folders in this project that contain resources, and application settings, as well as
+files required for the tests.
 
- - [Main Resources](/src/main/resources)
- - [Test Resources](/src/test/resources)
+- [Main Resources](/src/main/resources)
+- [Test Resources](/src/test/resources)
 
 ### Tests
 
-There is a Single class that contain all of our test cases: 
+There is a Single class that contain all of our test cases:
 
- - [GatewayServiceTest](/src/test/java/com/github/klefstad_teaching/cs122b/gateway/GatewayServiceTest.java)
+- [GatewayServiceTest](/src/test/java/com/github/klefstad_teaching/cs122b/gateway/GatewayServiceTest.java)
 
 ## Database
 
@@ -47,7 +66,6 @@ There is a Single class that contain all of our test cases:
 <table>
   <thead>
     <tr>
-      <th align="left" width="1100">🗄 idm</th>
       <th align="left" width="1100">🗄 gateway</th>
     </tr>
   </thead>
@@ -85,21 +103,114 @@ There is a Single class that contain all of our test cases:
     </tr>
     <tr></tr>
     <tr>
-      <td>user_id</td>
-      <td><code>INT</code></td>
-      <td><code>NULL</code></td>
-    </tr>
-    <tr></tr>
-    <tr>
       <td>path</td>
       <td><code>VARCHAR(2048)</code></td>
       <td><code>NULL</code></td>
     </tr>
+  </tbody>
+</table>
+
+## Routes
+
+### IDM
+
+<table>
+  <tbody >
     <tr>
-      <th colspan="3" align="left">Constraints</th>
+      <th colspan="2" align="left" width="1100">🧳&nbsp;&nbsp;Route</th>
+    </tr>
+    <tr></tr>
+    <tr>
+      <th align="left">Path Redirect </th>
+      <th align="left">Example</th>
     </tr>
     <tr>
-      <td colspan="3"><code>FOREIGN KEY</code> <code>(user_id)</code> <code>REFERENCES</code> <code>idm.user (id)</code> <code>ON UPDATE CASCADE</code> <code>ON DELETE CASCADE</code></td>
+      <td align="left"><pre lang="http">/idm/(restOfPath) -> /(restOfPath)</pre></td>
+      <td align="left"><pre lang="http">/idm/login -> /login</pre></td>
+    <tr></tr>
+    <tr>
+      <td colspan="2" align="left">Takes all requests that start with <code>/idm</code> and redirect the call to the idm without the <code>/idm</code> prefix</td>
     </tr>
   </tbody>
 </table>
+
+### Movies
+
+<table>
+  <tbody >
+    <tr>
+      <th colspan="2" align="left" width="1100">🧳&nbsp;&nbsp;Route</th>
+    </tr>
+    <tr></tr>
+    <tr>
+      <th align="left">Path Redirect </th>
+      <th align="left">Example</th>
+    </tr>
+    <tr>
+      <td align="left"><pre lang="http">/movies/(restOfPath) -> /(restOfPath)</pre></td>
+      <td align="left"><pre lang="http">/movies/movie/search -> /movie/search</pre></td>
+    <tr></tr>
+    <tr>
+      <td colspan="2" align="left">Takes all requests that start with <code>/movies</code> and redirect the call to the idm without the <code>/movies</code> prefix</td>
+    </tr>
+    <tr>
+      <th colspan="2" align="left" width="1100">🎛️&nbsp;&nbsp;Filter</th>
+    </tr>
+    <tr>
+        <td colspan="2" ><code>AuthFilter</code></td>
+    </tr>
+  </tbody>
+</table>
+
+### Billing
+
+<table>🎛️
+  <tbody >
+    <tr>
+      <th colspan="2" align="left" width="1100">🧳&nbsp;&nbsp;Route</th>
+    </tr>
+    <tr></tr>
+    <tr>
+      <th align="left">Path Redirect </th>
+      <th align="left">Example</th>
+    </tr>
+    <tr>
+      <td align="left"><pre lang="http">/billing/(restOfPath) -> /(restOfPath)</pre></td>
+      <td align="left"><pre lang="http">/billing/login -> /login</pre></td>
+    <tr></tr>
+    <tr>
+      <td colspan="2" align="left">Takes all requests that start with <code>/billing</code> and redirect the call to the idm without the <code>/billing</code> prefix</td>
+    </tr>
+    <tr><td colspan="2" ></td></tr>
+    <tr></tr> 
+    <tr>
+      <th colspan="2" align="left" width="1100">🎛️&nbsp;&nbsp;Filter</th>
+    </tr>
+    <tr>
+        <td colspan="2" ><code>AuthFilter</code></td>
+    </tr>
+  </tbody>
+</table>
+
+## Filters
+
+### GlobalLoggingFilter
+
+<table>
+  <tbody>
+    <tr>
+      <th  align="left" width="1100">🎛️&nbsp;&nbsp;Filter</th>
+    </tr>
+  </tbody>
+</table>
+
+### AuthFilter
+
+<table>
+  <tbody>
+    <tr>
+      <th  align="left" width="1100">🎛️&nbsp;&nbsp;Filter</th>
+    </tr>
+  </tbody>
+</table>
+
