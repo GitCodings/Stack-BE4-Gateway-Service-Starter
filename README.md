@@ -125,8 +125,8 @@ There is a Single class that contain all of our test cases:
       <th align="left">Example</th>
     </tr>
     <tr>
-      <td align="left"><pre>/idm/(restOfPath) -> /(restOfPath)</pre></td>
-      <td align="left"><pre>/idm/login -> /login</pre></td>
+      <td align="left"><code>/idm/(restOfPath) -> /(restOfPath)</code></td>
+      <td align="left"><code>/idm/login -> /login</code></td>
     <tr></tr>
     <tr>
       <td colspan="2" align="left">Takes all requests that start with <code>/idm</code> and redirect the call to the idm without the <code>/idm</code> prefix</td>
@@ -147,8 +147,8 @@ There is a Single class that contain all of our test cases:
       <th align="left">Example</th>
     </tr>
     <tr>
-      <td align="left"><pre>/movies/(restOfPath) -> /(restOfPath)</pre></td>
-      <td align="left"><pre>/movies/movie/search -> /movie/search</pre></td>
+      <td align="left"><code>/movies/(restOfPath) -> /(restOfPath)</code></td>
+      <td align="left"><code>/movies/movie/search -> /movie/search</code></td>
     <tr></tr>
     <tr>
       <td colspan="2" align="left">Takes all requests that start with <code>/movies</code> and redirect the call to the idm without the <code>/movies</code> prefix</td>
@@ -175,8 +175,8 @@ There is a Single class that contain all of our test cases:
       <th align="left">Example</th>
     </tr>
     <tr>
-      <td align="left"><pre>/billing/(restOfPath) -> /(restOfPath)</pre></td>
-      <td align="left"><pre>/billing/login -> /login</pre></td>
+      <td align="left"><code>/billing/(restOfPath) -> /(restOfPath)</code></td>
+      <td align="left"><code>/billing/login -> /login</code></td>
     <tr></tr>
     <tr>
       <td colspan="2" align="left">Takes all requests that start with <code>/billing</code> and redirect the call to the idm without the <code>/billing</code> prefix</td>
