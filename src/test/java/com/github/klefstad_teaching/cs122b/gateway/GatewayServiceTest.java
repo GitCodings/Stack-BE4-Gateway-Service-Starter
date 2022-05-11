@@ -10,6 +10,7 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,8 +24,12 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.ResultMatcher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -70,7 +75,7 @@ public class GatewayServiceTest
     public Integer checkRowCount()
     {
         return this.template.queryForObject(
-            "SELECT COUNT(*) FROM gateway.request;",
+            "SELECT COUNT(*) FROM `gateway`.`request`;",
             new MapSqlParameterSource(),
             Integer.class
         );
@@ -79,9 +84,9 @@ public class GatewayServiceTest
     public String getLastRowPair()
     {
         return this.template.queryForObject(
-            "SELECT CONCAT(ip_address, ',', path) " +
-            "FROM gateway.request r " +
-            "ORDER BY call_time DESC " +
+            "SELECT CONCAT(`ip_address`, ',', `path`) " +
+            "FROM `gateway`.`request` `r` " +
+            "ORDER BY `call_time` DESC " +
             "LIMIT 1;",
             new MapSqlParameterSource(),
             String.class
@@ -89,9 +94,62 @@ public class GatewayServiceTest
     }
 
     @Test
+    @Order(2)
     public void applicationLoads()
         throws Exception
     {
+    }
+
+    @Test
+    @Order(2)
+    public void loggingMultipleRequests()
+        throws Exception
+    {
+        Flux.range(0, 99)
+            .flatMap(num -> makeCall())
+            .blockLast();
+
+        waitForDb();
+        assertEquals(0, checkRowCount());
+
+        makeCall().block();
+
+        waitForDb();
+        assertEquals(100, checkRowCount());
+
+        Flux.range(0, 99)
+            .flatMap(num -> makeCall())
+            .blockLast();
+
+        waitForDb();
+        assertEquals(100, checkRowCount());
+
+        makeCall().block();
+
+        waitForDb();
+        assertEquals(200, checkRowCount());
+
+        String lastCallPair = getLastRowPair();
+
+        String[] split = lastCallPair.split(",");
+
+        waitForDb();
+        assertEquals(split[0], "127.0.0.1");
+        assertEquals(split[1], "/movies/movie/search");
+    }
+
+    @Test
+    @Timeout(value = 20)
+    @Order(3)
+    public void speedTest()
+        throws Exception
+    {
+        Flux.range(0, 10000)
+            .flatMap(num -> makeCall())
+            .blockLast();
+
+        waitForDb();
+        assertTrue(checkRowCount() >= 10000);
     }
 
     @Test
@@ -104,7 +162,7 @@ public class GatewayServiceTest
                      .exchange().expectStatus().isEqualTo(expectedModels.getValidResponse().getResult().status())
                      .expectBody().json(expectedModels.getValidResponseString());
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -117,7 +175,7 @@ public class GatewayServiceTest
                      .exchange().expectStatus().isEqualTo(expectedModels.getInvalidResponse().getResult().status())
                      .expectBody().json(expectedModels.getInvalidResponseString());
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -130,7 +188,7 @@ public class GatewayServiceTest
                      .exchange().expectStatus().isEqualTo(expectedModels.getExpiredResponse().getResult().status())
                      .expectBody().json(expectedModels.getExpiredResponseString());
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -144,7 +202,7 @@ public class GatewayServiceTest
                              testConfig.getAdminAccessToken())
                      .exchange().expectStatus().isEqualTo(HttpStatus.OK);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -155,7 +213,7 @@ public class GatewayServiceTest
                      .uri("/movies/movie/search")
                      .exchange().expectStatus().isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -167,7 +225,7 @@ public class GatewayServiceTest
                      .header(HttpHeaders.AUTHORIZATION, "")
                      .exchange().expectStatus().isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -180,7 +238,7 @@ public class GatewayServiceTest
                              testConfig.getAdminAccessToken())
                      .exchange().expectStatus().isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -194,7 +252,7 @@ public class GatewayServiceTest
                              testConfig.getAdminAccessToken())
                      .exchange().expectStatus().isEqualTo(HttpStatus.OK);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -205,7 +263,7 @@ public class GatewayServiceTest
                      .uri("/billing/cart/retrieve")
                      .exchange().expectStatus().isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -217,7 +275,7 @@ public class GatewayServiceTest
                      .header(HttpHeaders.AUTHORIZATION, "")
                      .exchange().expectStatus().isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
     @Test
@@ -230,56 +288,19 @@ public class GatewayServiceTest
                              testConfig.getAdminAccessToken())
                      .exchange().expectStatus().isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        assertEquals(checkRowCount(), 0);
+        assertEquals(0, checkRowCount());
     }
 
-    @Test
-    @Order(1)
-    public void loggingMultipleRequests()
-        throws Exception
+    private Mono<WebTestClient.ResponseSpec> makeCall()
     {
-        Flux.range(0, 99)
-            .map(num -> makeCall())
-            .flatMap(get -> Mono.fromCallable(get::exchange))
-            .blockLast();
-
-        waitForDb();
-        assertEquals(checkRowCount(), 0);
-
-        makeCall().exchange();
-
-        waitForDb();
-        assertEquals(checkRowCount(), 100);
-
-        Flux.range(0, 99)
-            .map(num -> makeCall())
-            .flatMap(get -> Mono.fromCallable(get::exchange))
-            .blockLast();
-
-        waitForDb();
-        assertEquals(checkRowCount(), 100);
-
-        makeCall().exchange();
-
-        waitForDb();
-        assertEquals(checkRowCount(), 200);
-
-        String lastCallPair = getLastRowPair();
-
-        String[] split = lastCallPair.split(",");
-
-        waitForDb();
-        assertEquals(split[0], "127.0.0.1");
-        assertEquals(split[1], "/movies/movie/search");
-    }
-
-    private WebTestClient.RequestHeadersSpec<?> makeCall()
-    {
-        return webTestClient.get()
-                            .uri("/movies/movie/search")
-                            .header(HttpHeaders.AUTHORIZATION,
-                                    JWTAuthenticationFilter.BEARER_PREFIX +
-                                    testConfig.getAdminAccessToken());
+        return Mono.fromCallable(
+            () -> this.webTestClient.get()
+                                    .uri("/movies/movie/search")
+                                    .header(HttpHeaders.AUTHORIZATION,
+                                            JWTAuthenticationFilter.BEARER_PREFIX +
+                                            testConfig.getAdminAccessToken())
+                                    .exchange()
+        );
     }
 
     private void waitForDb()
