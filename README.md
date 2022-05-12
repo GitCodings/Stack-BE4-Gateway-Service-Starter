@@ -251,7 +251,9 @@ LinkedBlockingQueue<GatewayRequestObject> requests = new LinkedBlockingQueue<>()
 
 List<GatewayRequestObject> drainedRequests = new ArrayList<>();
 
-requests.drainTo(drainedRequests); // This empties our "requests" queue and loads the values inside of "drainedRequests"
+// This empties our "requests" queue and loads 
+// the values inside of "drainedRequests"
+requests.drainTo(drainedRequests); 
 ```
 
 Once we have drained the queue we can take that new list and use it to create our `batchUpdate` call.
@@ -300,7 +302,8 @@ This will allow us to use the `subscribe()` function have the database query run
 
 ```java
 repo.createInsertMono()
-    .subscribeOn(SCHEDULER) // This just says "where" to subscibe on (there is a DB_SCHEDULER given to you in this class for this)
+    .subscribeOn(SCHEDULER) // This just says "where" to subscibe on 
+                            // (there is a DB_SCHEDULER given to you in this class for this)
     .subscribe();
 ```
 
