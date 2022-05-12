@@ -240,7 +240,7 @@ In our database we are creating `gateway.request` we should first create a class
 
 We should also create a `LinkedBlockingQueue` that will keep track of all of the `GatewayRequestObject`'s 
 
-When a request comes in we should map all the data from that request into a `GatewayRequestObject` and then add it into the `LinkedBlockingQueue`.
+When a request comes in we should map all the data from that request into a `GatewayRequestObject` and then add it into the `LinkedBlockingQueue`. We can get the incoming request by calling `exchange.getRequest()`.
 
 When the `LinkedBlockingQueue` reaches a certain limit (this limit is defined in the `GatewayServiceConfig` and can be retrieved with the `GatewayServiceConfig::getMaxLogs()` function) we need to take all the requests from the queue and then do a database query to insert them all.
 
