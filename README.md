@@ -215,8 +215,8 @@ We also need to capture all incoming requests that match the `Regex` descibed be
       <th colspan="2" align="left">Example</th>
     </tr>
     <tr>
-      <td align="left"><code>/Billing/**</code></td>
-      <td colspan="2" align="left"><code>/Billing/cart/insert</code></td>
+      <td align="left"><code>/billing/**</code></td>
+      <td colspan="2" align="left"><code>/billing/cart/insert</code></td>
     </tr>
     <tr><td colspan="3" ></td></tr>
     <tr></tr>
