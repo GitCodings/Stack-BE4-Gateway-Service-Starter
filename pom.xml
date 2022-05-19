@@ -17,8 +17,8 @@
         <version>1.0.3</version>
     </parent>
 
-    <artifactId>cs122b-be4-gateway-service</artifactId>
-    <name>CS122B Backend 4: Gateway Service</name>
+    <artifactId>cs122b-be4-gateway-service-starter</artifactId>
+    <name>CS122B Backend 4: Gateway Service Starter</name>
 
     <dependencies>
         <dependency>

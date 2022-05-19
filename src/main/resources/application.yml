@@ -7,6 +7,19 @@ spring:
     url: jdbc:mysql://localhost:3306
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - OPTIONS
+              - POST
+              - GET
+              - DELETE
+            allowedHeaders: "*"
+            allowCredentials: true
 
 server:
   address: 0.0.0.0
