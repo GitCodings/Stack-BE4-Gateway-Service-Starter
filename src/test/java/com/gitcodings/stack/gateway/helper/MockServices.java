@@ -1,6 +1,6 @@
-package com.github.klefstad_teaching.cs122b.gateway.helper;
+package com.gitcodings.stack.gateway.helper;
 
-import com.github.klefstad_teaching.cs122b.core.security.JWTAuthenticationFilter;
+import com.gitcodings.stack.core.security.JWTAuthenticationFilter;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

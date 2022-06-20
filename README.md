@@ -1,4 +1,4 @@
-# CS122B Backend 4 - The Gateway Service
+# Stack Backend 4 - The Gateway Service
 
 #### [Application](#application)
 
@@ -57,7 +57,7 @@ files required for the tests.
 
 There is a Single class that contain all of our test cases:
 
-- [GatewayServiceTest](/src/test/java/com/github/klefstad_teaching/cs122b/gateway/GatewayServiceTest.java)
+- [GatewayServiceTest](/src/test/java/com/gitcodings/stack/gateway/GatewayServiceTest.java)
 
 ## Database
 

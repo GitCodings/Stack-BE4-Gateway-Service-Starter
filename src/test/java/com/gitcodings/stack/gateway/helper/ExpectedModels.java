@@ -1,10 +1,10 @@
-package com.github.klefstad_teaching.cs122b.gateway.helper;
+package com.gitcodings.stack.gateway.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.klefstad_teaching.cs122b.core.base.ResultResponse;
-import com.github.klefstad_teaching.cs122b.core.result.IDMResults;
-import com.github.klefstad_teaching.cs122b.core.security.JWTAuthenticationFilter;
+import com.gitcodings.stack.core.base.ResultResponse;
+import com.gitcodings.stack.core.result.IDMResults;
+import com.gitcodings.stack.core.security.JWTAuthenticationFilter;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;

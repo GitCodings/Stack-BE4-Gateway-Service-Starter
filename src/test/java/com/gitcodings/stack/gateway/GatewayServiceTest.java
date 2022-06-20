@@ -1,11 +1,11 @@
-package com.github.klefstad_teaching.cs122b.gateway;
+package com.gitcodings.stack.gateway;
 
-import com.github.klefstad_teaching.cs122b.core.result.Result;
-import com.github.klefstad_teaching.cs122b.core.security.JWTAuthenticationFilter;
-import com.github.klefstad_teaching.cs122b.gateway.helper.ExpectedModels;
-import com.github.klefstad_teaching.cs122b.gateway.helper.MockServices;
-import com.github.klefstad_teaching.cs122b.gateway.helper.TestConfig;
-import com.github.klefstad_teaching.cs122b.gateway.helper.WebExchangeWithIP;
+import com.gitcodings.stack.gateway.helper.ExpectedModels;
+import com.gitcodings.stack.gateway.helper.MockServices;
+import com.gitcodings.stack.gateway.helper.TestConfig;
+import com.gitcodings.stack.gateway.helper.WebExchangeWithIP;
+import com.gitcodings.stack.core.result.Result;
+import com.gitcodings.stack.core.security.JWTAuthenticationFilter;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -24,9 +24,6 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.test.web.servlet.ResultMatcher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

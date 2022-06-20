@@ -1,7 +1,7 @@
-package com.github.klefstad_teaching.cs122b.gateway.routes;
+package com.gitcodings.stack.gateway.routes;
 
-import com.github.klefstad_teaching.cs122b.gateway.config.GatewayServiceConfig;
-import com.github.klefstad_teaching.cs122b.gateway.filter.AuthFilter;
+import com.gitcodings.stack.gateway.filter.AuthFilter;
+import com.gitcodings.stack.gateway.config.GatewayServiceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;

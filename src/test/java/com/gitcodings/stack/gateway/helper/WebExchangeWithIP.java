@@ -1,4 +1,4 @@
-package com.github.klefstad_teaching.cs122b.gateway.helper;
+package com.gitcodings.stack.gateway.helper;
 
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.ServerWebExchangeDecorator;

@@ -11,11 +11,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Checkout Tests
         run: |
-          wget https://raw.githubusercontent.com/klefstad-teaching/CS122B-BE4-Gateway-Service-Starter/main/pom.xml -O pom.xml;
-          wget https://raw.githubusercontent.com/klefstad-teaching/CS122B-BE4-Gateway-Service-Starter/main/src/test/java/com/github/klefstad_teaching/cs122b/gateway/GatewayServiceTest.java -O src/test/java/com/github/klefstad_teaching/cs122b/gateway/GatewayServiceTest.java;
-          wget https://raw.githubusercontent.com/klefstad-teaching/CS122B-BE4-Gateway-Service-Starter/main/src/test/resources/application.yml -O src/test/resources/application.yml;
-          wget https://raw.githubusercontent.com/klefstad-teaching/CS122B-BE4-Gateway-Service-Starter/main/src/test/resources/empty-gateway-test-data.sql -O src/test/resources/empty-gateway-test-data.sql;
-          wget https://raw.githubusercontent.com/klefstad-teaching/CS122B-BE4-Gateway-Service-Starter/main/src/test/resources/users.json -O src/test/resources/users.json;
+          wget https://raw.githubusercontent.com/GitCodings/Stack-BE4-Gateway-Service-Starter/main/pom.xml -O pom.xml;
+          wget https://raw.githubusercontent.com/GitCodings/Stack-BE4-Gateway-Service-Starter/main/src/test/java/com/gitcodings/stack/gateway/GatewayServiceTest.java -O src/test/java/com/gitcodings/stack/gateway/GatewayServiceTest.java;
+          wget https://raw.githubusercontent.com/GitCodings/Stack-BE4-Gateway-Service-Starter/main/src/test/resources/application.yml -O src/test/resources/application.yml;
+          wget https://raw.githubusercontent.com/GitCodings/Stack-BE4-Gateway-Service-Starter/main/src/test/resources/empty-gateway-test-data.sql -O src/test/resources/empty-gateway-test-data.sql;
+          wget https://raw.githubusercontent.com/GitCodings/Stack-BE4-Gateway-Service-Starter/main/src/test/resources/users.json -O src/test/resources/users.json;
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
@@ -26,6 +26,6 @@ jobs:
       - name: Setup DB
         run: |
           mysql.server start;
-          mysql -uroot < db.sql;
+          mysql -uroot < db/schema.sql;
       - name: Autograder
         uses: education/autograding@v1

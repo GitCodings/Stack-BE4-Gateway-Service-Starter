@@ -1,7 +1,7 @@
-package com.github.klefstad_teaching.cs122b.gateway.helper;
+package com.gitcodings.stack.gateway.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.klefstad_teaching.cs122b.core.security.JWTAuthenticationFilter;
+import com.gitcodings.stack.core.security.JWTAuthenticationFilter;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;

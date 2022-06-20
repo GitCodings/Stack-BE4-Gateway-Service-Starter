@@ -1,4 +1,4 @@
-package com.github.klefstad_teaching.cs122b.gateway.repo;
+package com.gitcodings.stack.gateway.repo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

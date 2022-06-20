@@ -8,7 +8,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 9
+      "points": 1
     },
     {
       "name": "loggingMultipleRequests",
@@ -18,7 +18,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 30,
-      "points": 7
+      "points": 1
     },
     {
       "name": "speedTest",
@@ -28,7 +28,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 120,
-      "points": 7
+      "points": 1
     },
     {
       "name": "authenticateAdmin",
@@ -38,7 +38,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "authenticateEmployee",
@@ -48,7 +48,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "authenticatePremium",
@@ -58,7 +58,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "moviesWithAuthHeader",
@@ -68,7 +68,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "moviesNoAuthHeader",
@@ -78,7 +78,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "moviesAuthHeaderWithNoValue",
@@ -88,7 +88,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "moviesAuthHeaderWithNoBearer",
@@ -98,7 +98,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "billingWithAuthHeader",
@@ -108,7 +108,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "billingNoAuthHeader",
@@ -118,7 +118,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "billingAuthHeaderWithNoValue",
@@ -128,7 +128,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     },
     {
       "name": "billingAuthHeaderWithNoBearer",
@@ -138,7 +138,7 @@
       "output": "",
       "comparison": "included",
       "timeout": 10,
-      "points": 7
+      "points": 1
     }
   ]
 }

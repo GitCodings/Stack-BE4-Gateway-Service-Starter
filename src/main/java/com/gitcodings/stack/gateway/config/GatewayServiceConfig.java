@@ -1,4 +1,4 @@
-package com.github.klefstad_teaching.cs122b.gateway.config;
+package com.gitcodings.stack.gateway.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;

@@ -1,7 +1,7 @@
-package com.github.klefstad_teaching.cs122b.gateway.filter;
+package com.gitcodings.stack.gateway.filter;
 
-import com.github.klefstad_teaching.cs122b.gateway.config.GatewayServiceConfig;
-import com.github.klefstad_teaching.cs122b.gateway.repo.GatewayRepo;
+import com.gitcodings.stack.gateway.config.GatewayServiceConfig;
+import com.gitcodings.stack.gateway.repo.GatewayRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
